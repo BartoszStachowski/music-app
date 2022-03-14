@@ -145,18 +145,28 @@
 						<!-- Country -->
 						<div class="mb-3">
 							<label class="inline-block mb-2">Country</label>
-							<select
+							<vee-field
+									as="select"
+									name="country"
 									class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
                   duration-500 focus:outline-none focus:border-black rounded">
-								<option value="USA">USA</option>
-								<option value="Mexico">Mexico</option>
+								<option value="USA">Poland</option>
+								<option value="Mexico">UK</option>
 								<option value="Germany">Germany</option>
-							</select>
+								<option value="Russia">Russia</option>
+							</vee-field>
+							<ErrorMessage class="text-red-600" name="country" />
 						</div>
 						<!-- TOS -->
 						<div class="mb-3 pl-6">
-							<input type="checkbox" class="w-4 h-4 float-left -ml-6 mt-1 rounded" />
+							<vee-field
+									type="checkbox"
+									name="tos"
+									value="1"
+									class="w-4 h-4 float-left -ml-6 mt-1 rounded"
+							/>
 							<label class="inline-block">Accept terms of service</label>
+							<ErrorMessage class="text-red-600 block" name="tos" />
 						</div>
 						<button type="submit"
 										class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition
@@ -184,8 +194,8 @@ export default {
 				age: 'required|min_value:18|max_value:100',
 				password: 'required|min:3|max:100',
 				confirm_password: 'confirmed:@password',
-				country: '',
-				tos: '',
+				country: 'required|excluded:Russia',
+				tos: 'required',
 			},
 		};
 	},
