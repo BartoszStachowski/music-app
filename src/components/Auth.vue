@@ -82,6 +82,8 @@
 					<vee-form
 							v-show="tab === 'register'"
 							:validation-schema="schema"
+							@submit="register"
+							:initial-values="userData"
 					>
 						<!-- Name -->
 						<div class="mb-3">
@@ -159,8 +161,8 @@
 									name="country"
 									class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
                   duration-500 focus:outline-none focus:border-black rounded">
-								<option value="USA">Poland</option>
-								<option value="Mexico">UK</option>
+								<option value="Poland">Poland</option>
+								<option value="UK">UK</option>
 								<option value="Germany">Germany</option>
 								<option value="Russia">Russia</option>
 							</vee-field>
@@ -206,6 +208,9 @@ export default {
 				country: 'required|excluded:Russia',
 				tos: 'required',
 			},
+			userData: {
+				country: 'Poland',
+			},
 		};
 	},
 	computed: {
@@ -213,6 +218,9 @@ export default {
 	},
 	methods: {
 		...mapMutations(['toggleAuthModal']),
+		register(values) {
+			console.log(values);
+		},
 	},
 };
 </script>
