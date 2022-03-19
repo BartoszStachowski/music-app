@@ -139,7 +139,6 @@
 									{{ error }}
 								</div>
 							</vee-field>
-							<ErrorMessage class="text-red-600" name="password" />
 						</div>
 						<!-- Confirm Password -->
 						<div class="mb-3">
@@ -204,9 +203,9 @@ export default {
 				email: 'required|min:3|max:100|email',
 				age: 'required|min_value:18|max_value:100',
 				password: 'required|min:3|max:100',
-				confirm_password: 'confirmed:@password',
-				country: 'required|excluded:Russia',
-				tos: 'required',
+				confirm_password: 'password_mismatch:@password',
+				country: 'required|country_excluded:Russia',
+				tos: 'tos',
 			},
 			userData: {
 				country: 'Poland',
