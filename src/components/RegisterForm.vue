@@ -116,7 +116,8 @@
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, usersCollection } from '@/includes/firebase';
 
 export default {
 	name: 'RegisterForm',
@@ -149,9 +150,21 @@ export default {
 			this.reg_alert_msg = 'Please wait! Your account is being created.';
 
 			let userCred = null;
-			const auth = getAuth();
 			try {
 				userCred = await createUserWithEmailAndPassword(auth, values.email, values.password);
+			} catch (error) {
+				this.reg_in_submission = false;
+				this.reg_alert_variant = 'bg-red-500';
+				this.reg_alert_msg = 'An unexpected error occurred. Please try again later.';
+				return;
+			}
+			try {
+				await usersCollection({
+					name: values.name,
+					email: values.email,
+					age: values.age,
+					country: values.country,
+				});
 			} catch (error) {
 				this.reg_in_submission = false;
 				this.reg_alert_variant = 'bg-red-500';
