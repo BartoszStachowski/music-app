@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
 import { auth, usersCollection } from '@/includes/firebase';
 
 export default createStore({
@@ -20,13 +20,18 @@ export default createStore({
 	},
 	actions: {
 		async register({ commit }, payload) {
-			await createUserWithEmailAndPassword(auth, payload.email, payload.password);
+			const userCred = await createUserWithEmailAndPassword(auth, payload.email, payload.password);
 
 			await usersCollection({
 				name: payload.name,
 				email: payload.email,
 				age: payload.age,
 				country: payload.country,
+			}, userCred.user.uid);
+
+			const authData = getAuth();
+			await updateProfile(authData.currentUser, {
+				displayName: payload.name,
 			});
 
 			commit('toggleAuth');
