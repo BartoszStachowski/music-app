@@ -4,6 +4,7 @@ import {
 	getAuth,
 	updateProfile,
 	signInWithEmailAndPassword,
+	signOut,
 } from 'firebase/auth';
 import { auth, usersCollection } from '@/includes/firebase';
 
@@ -50,6 +51,10 @@ export default createStore({
 			if (user) {
 				commit('toggleAuth');
 			}
+		},
+		async signOut({ commit }) {
+			await signOut(auth);
+			commit('toggleAuth');
 		},
 	},
 });
