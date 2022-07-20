@@ -5,28 +5,20 @@ import Manage from '@/views/Menage.vue';
 
 const routes = [
 	{
+		name: 'home',
 		path: '/',
 		component: Home,
 	},
 	{
+		name: 'about',
 		path: '/about',
 		component: About,
 	},
 	{
+		name: 'manage',
 		path: '/manage',
 		component: Manage,
 	},
-
-	// {
-	// 	path: '/',
-	// 	name: 'Home',
-	// 	component: Home,
-	// },
-	// {
-	// 	path: '/about',
-	// 	name: 'About',
-	// 	component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-	// },
 ];
 
 const router = createRouter({
